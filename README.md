@@ -4,7 +4,7 @@ Javascript plugin that allows you to create flat shadows easily.
 
 ## Instrutions
 
-Paste in your page head the following:
+Paste this in your page:
 
 `<script src="http://rawgit.com/cervgon/textshadow/master/textshadow.min.js"></script>`
 
@@ -50,7 +50,5 @@ Default value: parent height.
 
 
 ## License
-
-Creative Commons
 
 Made with ♥ for the people of the internet
