@@ -6,7 +6,7 @@ Javascript plugin that allows you to create flat shadows easily.
 
 Paste in your page head the following:
 
-`<script src="github.io/cervgon/textShadowJS/textShadow.js"></script>`
+`<script src="http://rawgit.com/cervgon/textshadow/master/textshadow.min.js"></script>`
 
 ## Use
 
