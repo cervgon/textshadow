@@ -50,5 +50,7 @@ Default value: parent height.
 
 
 ## License
+
 Copyright (c) 2016 Gonzalo Cervantes
+
 Made with ♥ for the people of the internet
