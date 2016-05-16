@@ -21,6 +21,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
+// Version 1.02
+// github.com/cervgon/textshadow
+
 function insertHTML(){
     $('textshadow').each(function(){
 
@@ -28,21 +32,19 @@ function insertHTML(){
         var shadow = '';
         var html  = '<span ';
 
+        $.each(this.attributes, function() {
+            if( this.name != 'shadowcolor' && this.name != 'shadows' && this.name != 'opacity' && this.name != 'blur' && this.name != 'angle' && this.name != 'style'){
+                console.log(this.name, this.value);
+                html += this.name+'="'+this.value+'" ';
+            }
+        });
+
         // shadowcolor
         var shadowcolor = $(this).attr("shadowcolor");
         if(shadowcolor ==null || shadowcolor ==undefined){shadowcolor= '#EEE'}
 
         var blur = $(this).attr("blur");
         if(blur ==null || blur ==undefined){blur= '0'}
-        
-        var classes = $(this).attr('class');
-        if(classes !=null || classes !=undefined){
-            html += ' class="'+classes+'" ';
-        }
-        var ids = $(this).attr('id');
-        if(ids !=null || ids !=undefined){
-            html += ' id="'+ids+'" ';
-        }
 
         html += 'style="';
         var styles = $(this).attr('style');
@@ -92,7 +94,6 @@ function insertHTML(){
 
         $(this).replaceWith(html);
     });
-    //console.log('The html has been loaded!');
 }
 
 function loadJQ() {
@@ -119,23 +120,12 @@ function loadJQ() {
 };
 
 document.addEventListener("DOMContentLoaded", function(event) { 
-	// Load CSS
-    var head  = document.getElementsByTagName('head')[0];
-    var link  = document.createElement('link');
-    link.rel  = 'stylesheet';
-    link.type = 'text/css';
-    link.href = 'textshadow.css';
-    link.media = 'all';
-    head.appendChild(link);
-
     // Check if jQuery is loaded.
     if(!window.jQuery) {
         // Load jQuery
-        //console.log('Loading jQuery..');
         loadJQ();
     }
     else{
-    	//console.log('jQuery is loaded!');
     	insertHTML();
     }
 });
