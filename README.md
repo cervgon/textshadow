@@ -70,6 +70,27 @@ E.g:
 ![alt tag](https://raw.githubusercontent.com/cervgon/textshadow/master/examples/img/e_blur.png)
 
 
+#### repeat
+
+`<textshadow repeat="3" shadows="21" shadowcolor="#000" style="color:#000">F</textshadow>`
+
+E.g:
+
+![alt tag](https://raw.githubusercontent.com/cervgon/textshadow/master/examples/img/f_repeat.png)
+
+
+#### endColor
+
+Both, shadowcolor and endcolor must be rgb.
+It will accept every type of color in further versions.
+
+`<textshadow shadows="40" shadowcolor="rgb(2,172,181)" endcolor="rgb(26,255,213)">G</textshadow>`
+
+E.g:
+
+![alt tag](https://raw.githubusercontent.com/cervgon/textshadow/master/examples/img/g_endcolor.png)
+
+
 #### Example
 
 `<div style="background-color:#333; padding:50px; overflow:hidden;">

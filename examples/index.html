@@ -7,7 +7,7 @@
 <script src="https://cdn.rawgit.com/cervgon/textshadow/master/textshadow.min.js"></script>
 <style>
 body{font-family: arial, helvetica, sans-serif; font-size: 15px; max-width: 640px; margin: 0 auto 0; padding: 0 20px 30px}
-.cont{font-size: 175px; overflow: hidden; margin: 0; width: 300px; line-height: 1em}
+.cont{font-size: 175px; overflow: hidden; margin: 0; width: 300px; line-height: 1.2em}
 h2{margin-bottom:5px;}
 label{margin: 10px 0 30px; display: block}
 hr{margin: 0; border-top:1px solid #eee;}
@@ -46,7 +46,20 @@ pre{white-space: normal}
 	<div class="cont">
 		<textshadow blur="20" shadowcolor="#fcc" shadows="20" style="color:#fff">E</textshadow>
 	</div>
-	<br>
+	<hr>
+	<h2>Repeat</h2>
+	<pre>E.g: repeat="3"</pre>
+	<div class="cont">
+		<textshadow repeat="3" shadows="21" shadowcolor="#000" style="color:#000">F</textshadow>
+	</div>
+	<hr>
+	<h2>EndColor</h2>
+	<pre>Both, shadowcolor and endcolor must be rgb.</pre>
+	<pre>It will accept every type of color in further versions.</pre>
+	<pre>E.g: shadowcolor="rgb(2,172,181)" endcolor="rgb(26,255,213)" shadows="40"</pre>
+	<div class="cont">
+		<textshadow shadows="40" shadowcolor="rgb(2,172,181)" endcolor="rgb(26,255,213)">G</textshadow>
+	</div>
 	<hr>
 	<h2>Test</h2>
 	<pre>shadowcolor="#000" angle="135" style="color:#fff; font-size:3.5em; line-height: 0.9em; font-weight:bold"</pre>
