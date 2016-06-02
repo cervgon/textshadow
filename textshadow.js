@@ -33,24 +33,23 @@ function insertHTML(){
         var html  = '<span ';
 
         $.each(this.attributes, function() {
-            if( this.name != 'shadowcolor' && this.name != 'shadows' && this.name != 'opacity' && this.name != 'blur' && this.name != 'angle' && this.name != 'style'){
-                console.log(this.name, this.value);
+            if (this.name != 'shadowcolor' && this.name != 'shadows' && this.name != 'opacity' && this.name != 'blur' && this.name != 'angle' && this.name != 'repeat' && this.name != 'endcolor' && this.name != 'style'){
                 html += this.name+'="'+this.value+'" ';
             }
         });
 
         // shadowcolor
         var shadowcolor = $(this).attr("shadowcolor");
-        if(shadowcolor ==null || shadowcolor ==undefined){shadowcolor= '#EEE'}
+        if (shadowcolor === undefined){shadowcolor= '#EEE';}
 
         var blur = $(this).attr("blur");
-        if(blur ==null || blur ==undefined){blur= '0'}
+        if (blur === undefined){blur= '0';}
 
         html += 'style="';
         var styles = $(this).attr('style');
-        if(styles !=null || styles !=undefined){
+        if (styles !== undefined){
             var last = styles.substr(styles.length - 1);
-            if(last == ';'){
+            if (last == ';'){
                 styles = styles.substr(0, styles.length - 1);
             }
             html += styles+'; ';
@@ -60,25 +59,91 @@ function insertHTML(){
         var angle = $(this).attr("angle");
         var anglex = 1;
         var angley = 1;
-        if(angle !=null || angle !=undefined){
-            var radians = angle * (Math.PI/180)
+        if (angle !== undefined){
+            var radians = angle * (Math.PI/180);
             anglex = Math.cos(radians);
             angley = Math.sin(radians);
         }
 
         // shadows
         var numberOfShadows = $(this).attr("shadows");
-        if(numberOfShadows ==null || numberOfShadows ==undefined){
+        if(numberOfShadows === undefined){
             var c;
-            if(angley<anglex){c=angley}
-            else{c=anglex}
-            if(c<0.5){c=0.5}
+            if (angley<anglex){c=angley;}
+            else {c=anglex;}
+            if (c<0.5){c=0.5;}
             numberOfShadows = $(this).parent().height()/c;
         }
 
-        for (var i = 0; i<numberOfShadows; i++) {
-            shadow += i*anglex +'px '+ i*angley +'px '+blur+'px ' + shadowcolor +', ';
-        };
+        // repeat
+        var repeat = $(this).attr("repeat");
+        if(repeat !== undefined){
+            var bgColor = $(this).parent().css("background-color");
+            if (bgColor == 'rgba(0, 0, 0, 0)'){bgColor = '#fff';}
+            var step = Math.trunc(numberOfShadows /repeat);
+            var firstEnd = Math.trunc(step/2);
+            var secondEnd = step;
+            for (var r = 0; r<repeat; r++) {
+                for (var i=0; i<firstEnd; i++){
+                    shadow += i*anglex +'px '+ i*angley +'px '+blur+'px ' + bgColor +', ';
+                }
+                for (var si=firstEnd+1; si<secondEnd; si++){
+                    shadow += si*anglex +'px '+ si*angley +'px '+blur+'px ' + shadowcolor +', ';
+                }
+                firstEnd += step;
+                secondEnd += step;
+            }
+        }
+        else{
+            // endcolor
+            var endcolor = $(this).attr("endcolor");
+            if (endcolor !== undefined){
+                var ec = endcolor;
+                var sc = shadowcolor;
+                // RGB or RGBA
+                var ecr,ecg,ecb;
+                var scr,scg,scb;
+                if (ec.match(/(^rgb\((\d+),\s*(\d+),\s*(\d+)\)$)/) !== null){
+                    if (sc.match(/(^rgb\((\d+),\s*(\d+),\s*(\d+)\)$)/) !== null){
+                        sc = sc.match(/(^rgb\((\d+),\s*(\d+),\s*(\d+)\)$)/)[0];
+                        ec = ec.match(/(^rgb\((\d+),\s*(\d+),\s*(\d+)\)$)/)[0];
+                        var econly = ec.substring(ec.indexOf('(') + 1, ec.lastIndexOf(')')).split(/,\s*/);
+                        ecr = econly[0];
+                        ecg = econly[1];
+                        ecb = econly[2];
+                        var sconly = sc.substring(sc.indexOf('(') + 1, sc.lastIndexOf(')')).split(/,\s*/);
+                        scr = Math.trunc(sconly[0]);
+                        scg = Math.trunc(sconly[1]);
+                        scb = Math.trunc(sconly[2]);
+                        var cstepr = Math.trunc((ecr-scr)/numberOfShadows);
+                        var cstepg = Math.trunc((ecg-scg)/numberOfShadows);
+                        var cstepb = Math.trunc((ecb-scb)/numberOfShadows);
+                        var gradr = scr+cstepr;
+                        var gradg = scg+cstepg;
+                        var gradb = scb+cstepb;
+                        for (var g = 1; g<numberOfShadows; g++) {
+                            gradr += cstepr;
+                            gradg += cstepg;
+                            gradb += cstepb;
+                            var gradColor = 'rgb('+gradr+','+gradg+','+gradb+')';
+                            shadow += g*anglex +'px '+ g*angley +'px '+blur+'px ' + gradColor +', ';
+                        }
+                    }
+                    else {
+                        console.error('Wrong RGB value in shadowcolor');
+                    }
+                }
+                // else RGB
+                else {
+                    console.error('Wrong RGB value in endcolor');
+                }
+            }
+            else {
+                for (var s = 1; s<numberOfShadows; s++) {
+                    shadow += s*anglex +'px '+ s*angley +'px '+blur+'px ' + shadowcolor +', ';
+                }
+            }
+        }
         shadow = shadow.substring(0, shadow.length-2);
         
         // opacity
@@ -103,31 +168,26 @@ function loadJQ() {
     script.type = 'text/javascript';
     document.getElementsByTagName("head")[0].appendChild(script);
 
-    var i = 0;
+    var t = 0;
     var timer = setInterval(function(){
       if(window.jQuery) {
         insertHTML();
         clearInterval(timer);
       }
       else{
-        i++;
-        if(i>100){
+        t++;
+        if(t>100){
             clearInterval(timer);
             console.error("This is taking too much.. :(");
         }
-      };
+      }
     },50);
-};
+}
 
-document.addEventListener("DOMContentLoaded", function(event) { 
+document.addEventListener("DOMContentLoaded", function(event){
     // Check if jQuery is loaded.
-    if(!window.jQuery) {
-        // Load jQuery
-        loadJQ();
-    }
-    else{
-    	insertHTML();
-    }
+    if(!window.jQuery){loadJQ();}
+    else{insertHTML();}
 });
 
 
