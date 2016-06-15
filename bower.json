@@ -1,0 +1,16 @@
+{
+  "name": "textshadow",
+  "main": "textshadow.min.js",
+  "version": "1.02",
+  "homepage": "https://github.com/cervgon/textshadow",
+  "authors": [
+    "Gonzalo Cervantes <cervgon@gmail.com>"
+  ],
+  "description": "Javascript plugin that allows you to create flat shadows easily.",
+  "keywords": [
+    "text",
+    "shadow",
+    "javascript"
+  ],
+  "license": "MIT"
+}
