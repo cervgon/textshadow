@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// Version 1.02
+// Version 1.04
 // github.com/cervgon/textshadow
 
 function insertHTML(){
@@ -67,7 +67,7 @@ function insertHTML(){
 
         // shadows
         var numberOfShadows = $(this).attr("shadows");
-        if(numberOfShadows === undefined){
+        if (numberOfShadows === undefined){
             var c;
             if (angley<anglex){c=angley;}
             else {c=anglex;}
@@ -77,7 +77,7 @@ function insertHTML(){
 
         // repeat
         var repeat = $(this).attr("repeat");
-        if(repeat !== undefined){
+        if (repeat !== undefined){
             var bgColor = $(this).parent().css("background-color");
             if (bgColor == 'rgba(0, 0, 0, 0)'){bgColor = '#fff';}
             var step = Math.trunc(numberOfShadows /repeat);
@@ -94,7 +94,7 @@ function insertHTML(){
                 secondEnd += step;
             }
         }
-        else{
+        else {
             // endcolor
             var endcolor = $(this).attr("endcolor");
             if (endcolor !== undefined){
@@ -148,12 +148,12 @@ function insertHTML(){
         
         // opacity
         var opacity = $(this).attr("opacity");
-        if(opacity){
-            html += 'position:relative; display:block; height:'+$(this).height()+'px"><span style="position:absolute; top:0; left:0">'+content+'</span><span style="position:absolute; top:0; left:0; text-shadow:'+shadow+';opacity:'+opacity+'">'+content+'</span>';
+        if (opacity){
+            html += 'position:relative; display:inline-block; height:'+$(this).height()+'px"><span style="visibility:hidden">'+content+'</span><span style="position:absolute; top:0; left:0">'+content+'</span><span style="position:absolute; top:0; left:0; text-shadow:'+shadow+';opacity:'+opacity+'">'+content+'</span>';
         }
-        else{
+        else {
             html += 'text-shadow:'+shadow+'">';
-            html += content;   
+            html += content;
         }
         html += '</span>';
 
@@ -170,13 +170,13 @@ function loadJQ() {
 
     var t = 0;
     var timer = setInterval(function(){
-      if(window.jQuery) {
+      if (window.jQuery) {
         insertHTML();
         clearInterval(timer);
       }
-      else{
+      else {
         t++;
-        if(t>100){
+        if (t>100){
             clearInterval(timer);
             console.error("This is taking too much.. :(");
         }
@@ -186,8 +186,8 @@ function loadJQ() {
 
 document.addEventListener("DOMContentLoaded", function(event){
     // Check if jQuery is loaded.
-    if(!window.jQuery){loadJQ();}
-    else{insertHTML();}
+    if (!window.jQuery){loadJQ();}
+    else {insertHTML();}
 });
 
 
