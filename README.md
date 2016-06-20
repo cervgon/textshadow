@@ -4,15 +4,38 @@ Javascript plugin that allows you to create flat shadows easily.
 
 ## Instrutions
 
-Paste this in your page:
+### CDN
+Load the script file in your application:
 
-`<script src="https://cdn.rawgit.com/cervgon/textshadow/master/textshadow.min.js"></script>`
+```html
+<script src="https://cdn.rawgit.com/cervgon/textshadow/master/textshadow.min.js"></script>
+```
+That's it. All set.
+
+### Bower
+Add to your `bower.json` file:
+```
+dependencies: {
+"textshadow": "latest"
+}
+```
+Then run:
+```
+bower install
+```
+Load the script file in your application:
+
+```html
+<script type="text/javascript" src="bower_components/textshadow/textshadow.min.js"></script>
+```
 
 ## Use
 
 ### Create the tag:
 
-`<textshadow>Sample Text</textshadow>`  
+```html
+<textshadow>Sample Text</textshadow>
+```  
 
 ### Parameters
 
@@ -20,11 +43,20 @@ Paste this in your page:
 Could be a HEX, RGB, RGBA, HSL or HSLA value.
 Default value: #EEE;
 
-- HEX: `<textshadow shadowcolor="#fcc">A</textshadow>`
+- HEX:
+```html
+<textshadow shadowcolor="#fcc">A</textshadow>
+```
 
-- RGBA: `<textshadow shadowcolor="rgba(255,204,204,0)">A</textshadow>`
+- RGBA:
+```html
+<textshadow shadowcolor="rgba(255,204,204,0)">A</textshadow>
+```
 
-- HSLA: `<textshadow shadowcolor="hsla(0,100%,90%,1)">A</textshadow>`
+- HSLA:
+```html
+<textshadow shadowcolor="hsla(0,100%,90%,1)">A</textshadow>
+```
 
 E.g:
 
@@ -35,7 +67,9 @@ E.g:
 Shadow direction.
 Default value: 45.
 
-`<textshadow angle="60" shadowcolor="#fcc">B</textshadow>`
+```html
+<textshadow angle="60" shadowcolor="#fcc">B</textshadow>
+```
 
 E.g:
 
@@ -46,7 +80,9 @@ E.g:
 Number of shadows to render.
 Default value: parent height.
 
-`<textshadow shadows="20" angle="60" shadowcolor="#fcc">C</textshadow>`
+```html
+<textshadow shadows="20" angle="60" shadowcolor="#fcc">C</textshadow>
+```
 
 E.g:
 
@@ -54,7 +90,9 @@ E.g:
 
 
 #### opacity (float number between 0 to 1)
-`<textshadow opacity="0.4" shadowcolor="#000">D</textshadow>`
+```html
+<textshadow opacity="0.4" shadowcolor="#000">D</textshadow>
+```
 
 E.g:
 
@@ -63,7 +101,9 @@ E.g:
 
 #### blur
 
-`<textshadow blur="20" shadowcolor="#fcc" shadows="20" style="color:#fff">E</textshadow>`
+```html
+<textshadow blur="20" shadowcolor="#fcc" shadows="20" style="color:#fff">E</textshadow>
+```
 
 E.g:
 
@@ -72,7 +112,9 @@ E.g:
 
 #### repeat
 
-`<textshadow repeat="3" shadows="21" shadowcolor="#000" style="color:#000">F</textshadow>`
+```html
+<textshadow repeat="3" shadows="21" shadowcolor="#000" style="color:#000">F</textshadow>
+```
 
 E.g:
 
@@ -84,7 +126,9 @@ E.g:
 Both, shadowcolor and endcolor must be rgb.
 It will accept every type of color in further versions.
 
-`<textshadow shadows="40" shadowcolor="rgb(2,172,181)" endcolor="rgb(26,255,213)">G</textshadow>`
+```html
+<textshadow shadows="40" shadowcolor="rgb(2,172,181)" endcolor="rgb(26,255,213)">G</textshadow>
+```
 
 E.g:
 
@@ -93,9 +137,14 @@ E.g:
 
 #### Example
 
-`<div style="background-color:#333; padding:50px; overflow:hidden;">
-	<textshadow shadowcolor="#000" angle="135" style="color:#fff; font-size:100px; line-height: 0.9em; font-weight:bold">THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG</textshadow>
-</div>`
+```html
+<div style="background-color:#333; padding:50px; overflow:hidden;">
+	<textshadow shadowcolor="#000" angle="135"
+	style="color:#fff; font-size:100px; line-height: 0.9em; font-weight:bold">
+		THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+	</textshadow>
+</div>
+```
 ![alt tag](https://raw.githubusercontent.com/cervgon/textshadow/master/examples/img/example.png)
 
 
