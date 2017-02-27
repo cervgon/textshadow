@@ -2,7 +2,7 @@
 
 Javascript plugin that allows you to create flat shadows easily.
 
-## Instrutions
+## Instructions
 
 ### CDN
 Load the script file in your application:
